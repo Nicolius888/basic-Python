@@ -1,1 +1,2 @@
-.zip
+#ignore all .zip files in the repository.
+*.zip
