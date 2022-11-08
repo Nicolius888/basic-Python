@@ -9,7 +9,7 @@ print(a)
 a = 10  
 
 print(type(a))
-print(id(a))
+print(id(a))#id is to see the number of the memory location
 
 print(a)
 
@@ -76,12 +76,20 @@ print(myDictionary["anotherKey"])
 #print(myDictionary.key)
 #print(myDictionary[0]) 
 
-words = myDictionary["key"]    #1.we declare words as my key
-myDictionary["key"] = "value2" #we change the key
+words = myDictionary["key"]    #first, we declare words as my key
+myDictionary["key"] = "value2" #then, we change the key
 
-print(words)                   #word is a pointer or his own memory location?
-                               #prints "value"
-                               #is his own memory location
+print(words)                   #but now, word is a pointer or his own memory location?
+
+                               #it prints "value", not "value2"
+                               #so is his own memory location
+#we can even check the memory id                              
+print(id(words))                  #139675395546672
+print(id(myDictionary["key"]))    #139675392937840                           
+
+#So we can conclude that, asigning a key from a dictionary to a variable, 
+#even if it looks like its just a reference
+#in the moment it is asigned, python creates a copy.
 
 #####deleting keys
 #there's two ways
@@ -96,22 +104,24 @@ newDict = {
 }
 
 #we have pop, it delets and then retrns it
-print(newDict.pop("3"))
-print(newDict)
+print(newDict.pop("3"))#3
+print(newDict)#{'1': 1, '2': 2, '4': 4, '5': 5, '6': 6}
 
 #as it returns it, we can asign the returned value to a new variable
 oldValue = newDict.pop("4")
-print(oldValue, newDict)
+print(oldValue, newDict)# 4 {'1': 1, '2': 2, '5': 5, '6': 6}
 
 #we also can give it a second method as default return value, in a case when the key is not founded in our list.
-print(newDict.pop("9", "not found"))
+print(newDict.pop("9", "not found"))#not found
 
 
 #####del keyword:
 #it is the same but it doesnt return the element
 
+# deletedEl = del newDict["2"] , this gives error
 del newDict["1"]
-print(newDict)
+print(newDict)#{'2': 2, '5': 5, '6': 6}
+
 
 
 
@@ -143,7 +153,7 @@ print(union)  # {0, 1, 2, 3, 4, 5, 6, 8, 9}, i.e. it deletes the repeated ones.a
 print(union2) # it orders the numbers and leaves the string for the end.
 print(union3) #{0, 1, 2, 3, 4, 5, 6, 8, 'hello', 'world'}
 print(union4) # {0, 1, 2, 3, 4, 'c', 6, 5, 8, 9, 'a'} here python says "Too Much bro", without the nine the behavior is the same as above, but as we see
-              # with more mixed types is more complex, i thin its s weird behavior, better to study this case immediately in the future. 
+              # with more mixed types is more complex, its a weird behavior, better to study how sets works in the immediate future. 
 
 #INTERSECTION
 
@@ -155,17 +165,17 @@ print(inter) # {2,4}, i.e. it saves just the repeated elements.
 
 diff = even - oneToFive
 print(diff)  #{0,8,6}
-#i.e if a even we quit the numbers that has oneToFive, the only remaining are 0, 8, and 6.
+#weird case, this ones keep unordered.
 
 secondDiff = oneToFive - even
 print(secondDiff) #{1, 3, 5, 9}
 
 
 #SIMMETRIC DIFFERENCE
-#values that are not repeated even in the first set or in the second set
+#unique values in the first and in the second set
 
 simmetric = even ^ oneToFive
-print(simmetric)  # {0, 1, 3, 5, 6, 8, 9} , if you see this are the results of the last two operation, combined.
+print(simmetric)  # {0, 1, 3, 5, 6, 8, 9} , if you see, this are the results of the last two operation, combined.
                   # 0,6,8 are the unique values in the first set and 1,3,5,9, are the unique values in the second set
                   # 2 and 4 exist in both sets, so python keeps them outside in this case.
 
@@ -198,12 +208,12 @@ print(myText.replace("e", "i")) #hillo Biautiful, biautiful wOrld
 
 print(myText.find("wOrld")) #27
 
-print(myText.find("world")) # -1
+print(myText.find("world")) # -1 (don't exist)
 
 #we can make a list from a string
 print(myText.split()) #['hello', 'Beautiful,', 'beautiful', 'wOrld']
 
-#but supouse we dont want the commas
+#but supouse we dont want the commas (look "Beautiful,")
 
 # we can split from the commas
 print(myText.split(',')) # ['hello Beautiful', ' beautiful wOrld']
@@ -233,7 +243,7 @@ num = "44" #string with numbers
 print(num.isnumeric()) #True
 print(num.isdecimal()) #True
 print(num.isdigit()) #True
-#python knows that are a number in the string.
+#python knows there are a number in the string.
 
 
 #...
@@ -254,7 +264,7 @@ print(
    X-Y,#-200
    X*Y,#150000
    Y/X, #1.6666666666666667 division operator
-   Y//X,#0.6 floor division operator
+   Y//X,#1 floored division operator
    X%Y, #300
    X-200, #100
 #  myText - "d" #unsupported operand type for -: 'str' and 'str'
@@ -278,6 +288,9 @@ print(a//3)#0
 
 #'//' is used to obtain the smallest integer nearest to the quotient obtained by dividing two numbers.
 
+#remember the difference between .floor() and .ceil() in javascript
+#you guess it, this works as floor.
+
 #Power operator 
 
 print(a**b) # 2^2 = 4
@@ -286,8 +299,9 @@ print(a**3) # 2^3 = 8
 print(a**-1) # 0.5
 print(a**-2) # 0.25
 
-#####ASIGANATION
+#####ASIGNATION
 #this works for every math op.
+#operation plus asignation/overwrite:
 a += b
 a -= b
 a *= b
@@ -312,12 +326,16 @@ a //= b
 # ^=
 # <<=
 # >>=
-# >>>= tab nine sugestion
-# |>   tab nine
+
 
 #bit: &, |, ^, ~, <<, >>.
-#not confuse with the set operators, there work different here.
+#not confuse with the set operators, these work different here.
 
 #to exercise make an import math
 #and search what that library can do.
 #help(math) or google the docs
+
+import math
+myInt = 2.66666
+print(math.ceil(myInt))#3
+print(math.pi)#3.141592653589793
