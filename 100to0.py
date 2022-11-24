@@ -8,7 +8,7 @@
 #    count -= 1
 
 #-------------------------------
-#rango_1_100 = range(1,101)       #see how we can save a range in a variable, awesome.
+rango_1_100 = range(1,101)       #see how we can save a range in a variable, awesome.
 
-for i in reversed(range(1,101)):  #and how we literally say to the for loop to go backwards.
-    print(f"- {i}")
+for i in reversed(rango_1_100):  #and how we literally say to the for loop to go backwards
+    print(f"{i}")              #whit the reversed method.
