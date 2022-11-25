@@ -158,6 +158,75 @@ print(newSportCar.brand) #ford
 print(newSportCar.color) #green
 print(newSportCar.engine) #V8
 
+#---------------------------------------------------
+
+#NOTE: the classes in python are just sugar syntax, below the surface this are just dictionaries.
+
+#----------------------------------------------------
+
+#Abstract classes
+
+from abc import ABC, abstractmethod #this is a must
+
+#the idea is to make normally a father that has to be instanciated in the child
+
+class Animal(ABC):
+    
+    @abstractmethod   #this is abstract, needs especific definition for hech instance
+    def sound(self):
+        pass
+
+    def pet(self):        #this is not abstract, childs will use this implementation.
+        print("mmm nice")
+
+#cannot instanciate like newAnimal=Animal() <---error
+
+class Dog(Animal):
+
+    def sound(self): #we MUST define the father method.
+        print("arf")
+
+class Cat(Animal):
+    def sound(self):
+        print("miau")
+
+
+newDog = Dog()
+newDog.sound() #arf
+newDog.pet() #mmm nice
+
+newCat = Cat()
+newCat.sound() #miau
+newCat.pet() #mmm nice
+
+#different animals, different sounds
+#but both like being peted =)
+
+
+#---------------------------------------------------------------
+#Composition
+
+#its like inheritance but instead of having a relation of IS A, its more like HAS A
+
+class Product():
+    name = "product name"
+
+
+class Provider():
+    product1 = Product()
+    providerName = "some provider"
+
+pp = Provider()
+
+print(pp.providerName)#some provider
+print(pp.product1.name)#product name    #we can acces to properties in chain 
+
+#this is very useful, search form more use cases.
+
+
+
+
+
 
 
 
