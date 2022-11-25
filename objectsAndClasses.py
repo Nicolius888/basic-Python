@@ -97,8 +97,68 @@ class myBoolean(Object): #just pass the Father class as an argument
 
 newBool = myBoolean()
 
+#same methods and properties:
+
 print(newBool.checkPrivate()) #this is private
 newBool.modifyPrivate("boolean")
 print(newBool.checkPrivate()) #this boolean is private
+
+#NOTE: as a good practice, aviod multiple inheritance, it is posible, but bring problems.
+#To inherit from multiple fathers, just put the antecesor,
+#if a "student", needs to be a "civil person" and  "biological human" too
+#supose that the inheritance wa, "biological human" --> "civil person"
+#just add it at the end of the chain :
+#"biological human" --> "civil person"-->"student"
+#student will inherit everything from biological human and from civil person.
+
+#class biological human()
+#class civil person(biological human)
+#class student(civil person)
+
+#---------------
+print(dir(newBool))#to see everithing inside the class...
+#---------------
+
+#---------------------------------------------------
+#Constructor
+
+class Car():
+
+    brand = "none"
+    color = "none"
+
+    def __init__(self, color): #__init__ its the keyword for the constructor
+        self.brand = "ford"    #works to define how the instance must be initialized
+        self.color = color     #to define properties throug arguments or by default.
+
+
+newCar = Car("blue")
+print(newCar.brand) #ford
+print(newCar.color) #blue
+
+#see __del__ to create a destructor function in the class, at the end of
+#all things related to de object pyhton will invoke it and delete the object
+#the garbage collector do it anyways
+#and, you can use it too as del(nameOfYourInstance)
+
+#Calling Constructors of Fathers
+
+class SportCar(Car):
+
+    engine = "none"
+
+    def __init__(self, engine, color):
+        self.engine = engine
+        super().__init__(color)  #keyword super to call the father and then the desired method
+                                   #the constructor in this case.
+
+newSportCar = SportCar("V8", "green")
+
+print(newSportCar.brand) #ford
+print(newSportCar.color) #green
+print(newSportCar.engine) #V8
+
+
+
 
 
